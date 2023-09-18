@@ -1,0 +1,5 @@
+.btn-heart_active {
+  background: url('../../../images/heart-active.svg') center no-repeat;
+  border: none;
+  background-size: 100%;
+}

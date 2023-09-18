@@ -1,0 +1,21 @@
+.header__member-area {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  margin-right: 27px;
+}
+
+@media screen and (max-width: 460px) {
+  .header__member-area {
+    flex-wrap: wrap;
+    justify-content: right;
+    margin-right: 15px;
+    align-self: center;
+    flex-direction: column;
+    text-align: center;
+    order: 1;
+    margin-bottom: 40px;
+    margin-top: 12px;
+  }
+}

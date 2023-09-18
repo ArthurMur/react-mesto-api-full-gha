@@ -1,0 +1,32 @@
+.profile__descr {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 492px;
+  margin: 0;
+}
+
+@media (max-width:880px) {
+  .profile__descr {
+    max-width: calc(92vw - 150px - 120px - 38px);
+  }
+}
+
+@media (max-width:767px) {
+  .profile__descr {
+    font-size: 15px;
+  }
+}
+
+@media (max-width:525px) {
+  .profile__descr {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin-bottom: 36px;
+    max-width: 400px;
+  }
+}

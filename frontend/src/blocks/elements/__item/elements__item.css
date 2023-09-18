@@ -1,0 +1,13 @@
+.elements__item {
+  max-width: 282px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 460px) {
+  .elements__item {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,4 @@
+.popup__content-delete {
+  min-height: calc(181px - 36px - 36px);
+  flex-direction: column;
+}

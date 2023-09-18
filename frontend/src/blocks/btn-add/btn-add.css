@@ -1,0 +1,29 @@
+.btn-add {
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  box-sizing: border-box;
+  background: none;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  align-self: center;
+  transition: opacity 0.3s ease;
+  padding: 0;
+}
+
+.btn-add:hover {
+  opacity: 0.6;
+}
+
+@media (max-width:767px) {
+  .btn-add {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width:525px) {
+  .btn-add {
+    width: 100%;
+    transform: none;
+  }
+}

@@ -1,0 +1,13 @@
+.container {
+  box-sizing: border-box;
+  max-width: 918px;
+  width: 100%;
+  margin: 48px auto 60px auto;
+  padding: 0 19px;
+}
+
+@media (max-width: 460px) {
+  .container {
+    margin: 38.25px auto 36px auto;
+  }
+}

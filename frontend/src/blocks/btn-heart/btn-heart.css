@@ -1,0 +1,21 @@
+.btn-heart {
+  border: none;
+  background: url('../../images/heart.svg') center no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+  margin-right: 30px;
+  min-width: 22px;
+  min-height: 19px;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-heart:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 460px) {
+  .btn-heart {
+    margin-right: 20px;
+  }
+}

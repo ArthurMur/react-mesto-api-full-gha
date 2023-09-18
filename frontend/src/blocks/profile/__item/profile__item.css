@@ -1,0 +1,16 @@
+.profile__item {
+  display: flex;
+  gap: 18px;
+
+}
+
+@media (max-width: 525px) {
+  .profile__item {
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+
