@@ -120,7 +120,6 @@ const updateUserData = (req, res, next) => {
 
 // Проверка почты и пароля
 const login = (req, res, next) => {
-  console.log(JWT_SECRET, NODE_ENV);
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {

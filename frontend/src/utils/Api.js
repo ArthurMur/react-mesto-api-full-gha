@@ -1,9 +1,7 @@
-import apiFindings from './apiFindings';
-
 export class Api {
-  constructor({link, headers}) {
-    this._link = link;
-    this._headers = headers;
+  constructor() {
+    this._link = 'http://api.domainname.students.nomoredomainsrocks.ru';
+    this._headers = { "Content-Type": "application/json" };
   }
   //Метод отбраоботки сервера 
   _checkResponse(res){
@@ -15,7 +13,7 @@ export class Api {
   }
   //Инициализация карточек с сервака
   getInitialCards(){
-    return fetch(`${this._link}cards`, {
+    return fetch(`${this._link}/cards`, {
     headers: this._headers
     })
     .then(this._checkResponse);
@@ -28,7 +26,7 @@ export class Api {
 
   //Добавление новой карточки на сервак
   addNewCard(name, link){
-    return fetch(`${this._link}cards`, {
+    return fetch(`${this._link}/cards`, {
       headers: this._headers,
       method: 'POST',
       body: JSON.stringify({ name, link })
@@ -38,7 +36,7 @@ export class Api {
   
   // Удаления карточки с сервака
   deleteCard(cardId) {
-    return fetch(`${this._link}cards/${cardId}`, {
+    return fetch(`${this._link}/cards/${cardId}`, {
       headers: this._headers,
       method: 'DELETE',
     })
@@ -47,7 +45,7 @@ export class Api {
 
   // Получение данных пользователя с сервака
   getUserData() {
-  return fetch(`${this._link}users/me`, {
+  return fetch(`${this._link}/users/me`, {
     headers: this._headers
   })
     .then(this._checkResponse)
@@ -55,7 +53,7 @@ export class Api {
 
   // Отправка данных пользователя на сервак
   sendUserData(userName, userAbout) {
-    return fetch(`${this._link}users/me`, {
+    return fetch(`${this._link}/users/me`, {
       headers: this._headers,
       method: 'PATCH',
       body: JSON.stringify({ name: userName, about: userAbout })
@@ -65,7 +63,7 @@ export class Api {
 
   // Отправка данных о новом аватаре на сервак
   sendAvatarData(avatarLink) {
-    return fetch(`${this._link}users/me/avatar`, {
+    return fetch(`${this._link}/users/me/avatar`, {
       headers: this._headers,
       method: 'PATCH',
       body: JSON.stringify({ avatar: avatarLink.avatar })
@@ -76,13 +74,13 @@ export class Api {
   // Метод обработки лайков карточки
   changeLikeCardStatus (cardId, isLiked) {
     if (isLiked) {
-      return fetch(`${this._link}cards/${cardId}/likes`, {
+      return fetch(`${this._link}/cards/${cardId}/likes`, {
         headers: this._headers,
         method: 'PUT',
       })
       .then(this._checkResponse)
     } else {
-      return fetch(`${this._link}cards/${cardId}/likes`, {
+      return fetch(`${this._link}/cards/${cardId}/likes`, {
         headers: this._headers,
         method: 'DELETE',
       })
@@ -91,9 +89,6 @@ export class Api {
   }
 }
 
-
-
-const api = new Api(apiFindings);
-
+const api = new Api();
 
 export default api;
