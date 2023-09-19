@@ -23,6 +23,7 @@ const { PORT = 3000, BASE_PATH = 'localhost' } = process.env;
 const app = express();
 
 app.use(cors());
+app.options('*', cors());
 
 app.use(helmet());
 
