@@ -164,14 +164,14 @@ function App() {
                 cards={ cards }
               />}
             />
-            <Route path='/sign-in' element={<Login 
+            <Route path='/signin' element={<Login 
               handleLogin = { handleLogin }
               isOpen = { tooltipOpen }
               onClose = { closeAllPopups }
               status = { status }
               />}
             />
-            <Route path='/sign-up' element={<Register 
+            <Route path='/signup' element={<Register 
               handleRegister = { handleRegister }
               isOpen = { tooltipOpen }
               onClose = { closeAllPopups }
