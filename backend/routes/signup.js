@@ -2,7 +2,7 @@ const signupRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 
 const { URL_REGEX } = require('../utils/constants');
-const { registerUser } = require('../controllers/users').default;
+const { registerUser } = require('../controllers/users');
 
 signupRouter.post('/', celebrate({
   body: Joi.object().keys({

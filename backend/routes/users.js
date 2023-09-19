@@ -6,7 +6,7 @@ const { URL_REGEX } = require('../utils/constants');
 const {
   getUserList, getUserId, updateUserAvatar,
   updateUserData, getMe,
-} = require('../controllers/users').default;
+} = require('../controllers/users');
 
 // возвращает всех пользователей
 userRouter.get('/', auth, getUserList);
