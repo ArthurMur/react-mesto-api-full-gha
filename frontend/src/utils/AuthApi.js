@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 class AuthApi {
   constructor(authUrl) {
     this._authUrl = authUrl;
@@ -42,6 +43,12 @@ class AuthApi {
       body: JSON.stringify({ password, email })
     })
       .then(this._processingServerResponse)
+      .then((data) => {
+        if (data.token) {
+          Cookies.set('jwt', data.token, { expires: 7 });
+        }
+        return data;
+      })
   }
 }
 
