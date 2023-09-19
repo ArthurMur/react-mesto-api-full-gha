@@ -9,15 +9,15 @@ function Header(props) {
         { props.isLoggedIn ? ( // Если пользователь авторизован, то он увидит этот код:
           <>
             <p className="header__menu-item">{ props.email }</p>
-            < Link to='/sign-in' className="header__menu-item" onClick={ props.isLogout }>Выйти</Link>
+            < Link to='/signin' className="header__menu-item" onClick={ props.isLogout }>Выйти</Link>
           </>
         ) : ( // Если пользователь не авторизован, то вот этот код:
           <Routes>
-          <Route path='/sign-up' element={
-            <Link to='/sign-in' className="header__menu-item">Войти</Link>
+          <Route path='/signup' element={
+            <Link to='/signin' className="header__menu-item">Войти</Link>
           }/>
-            <Route  path='/sign-in' element={
-              <Link to='/sign-up' className="header__menu-item">Регистрация</Link>
+            <Route  path='/signin' element={
+              <Link to='/signup' className="header__menu-item">Регистрация</Link>
             } />
           </Routes>
         )} 

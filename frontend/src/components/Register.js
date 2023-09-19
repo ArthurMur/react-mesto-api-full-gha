@@ -34,7 +34,7 @@ function Login (props) {
         </form>
         <div className='auth__register'>
           <p>Уже зарегистрированы?</p>
-          <Link to="/sign-in" className="auth__link">Войти</Link>
+          <Link to="/signin" className="auth__link">Войти</Link>
         </div>
       </div>
       <InfoTooltip
