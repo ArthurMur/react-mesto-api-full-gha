@@ -1,22 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
-import express from 'express';
-import { connect } from 'mongoose';
-import helmet from 'helmet';
-import { rateLimit } from 'express-rate-limit';
-import { json, urlencoded } from 'body-parser';
-import cookieParser from 'cookie-parser';
-import { errors } from 'celebrate';
-import cors from 'cors';
-import userRouter from './routes/users';
-import cardRouter from './routes/cards';
-import signinRouter from './routes/signin';
-import signupRouter from './routes/signup';
-import errorHandler from './middlewares/error-handler';
-import NotFoundError from './errors/notFoundError';
+const express = require('express');
+const mongoose = require('mongoose');
+const helmet = require('helmet');
+const { rateLimit } = require('express-rate-limit');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const { errors } = require('celebrate');
+const cors = require('cors');
+const userRouter = require('./routes/users');
+const cardRouter = require('./routes/cards');
+const signinRouter = require('./routes/signin');
+const signupRouter = require('./routes/signup');
+const errorHandler = require('./middlewares/error-handler');
+const NotFoundError = require('./errors/notFoundError');
 
-import { requestLogger, errorLogger } from './middlewares/logger'; // логгеры
+const { requestLogger, errorLogger } = require('./middlewares/logger'); // логгеры
 
 const { PORT = 3000, BASE_PATH = 'localhost' } = process.env;
 
@@ -36,12 +36,12 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.use(json());
-app.use(urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // подключаемся к серверу mongo
-connect('mongodb://127.0.0.1:27017/mestodb')
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
   .then(() => console.log('База данных подключена.'))
   .catch((err) => console.log('DB error', err));
 
