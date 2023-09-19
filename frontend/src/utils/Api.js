@@ -1,6 +1,6 @@
 export class Api {
   constructor() {
-    this._link = 'http://api.domainname.students.nomoredomainsrocks.ru';
+    this._link = 'https://api.domainname.students.nomoredomainsrocks.ru';
     this._headers = { "Content-Type": "application/json" };
   }
   //Метод отбраоботки сервера 
