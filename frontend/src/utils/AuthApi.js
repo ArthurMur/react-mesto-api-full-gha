@@ -53,6 +53,6 @@ class AuthApi {
 }
 
 // Создание экземпляра класса
-const apiAuth = new AuthApi('http://api.domainname.students.nomoredomainsrocks.ru');
+const apiAuth = new AuthApi('https://api.domainname.students.nomoredomainsrocks.ru');
 // Экспорт экземпляра класса
 export default apiAuth;
