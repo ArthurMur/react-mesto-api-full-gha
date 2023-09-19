@@ -1,7 +1,10 @@
+import Cookies from 'js-cookie';
 export class Api {
-  constructor() {
-    this._link = 'https://api.domainname.students.nomoredomainsrocks.ru';
-    this._headers = { "Content-Type": "application/json" };
+  constructor(data) {
+    this._link = data.link;
+    this._headers = {
+      ...data.headers, 
+      authorization: `Bearer ${Cookies.get('token')}`};
   }
   //Метод отбраоботки сервера 
   _checkResponse(res){
@@ -89,6 +92,11 @@ export class Api {
   }
 }
 
-const api = new Api();
+const api = new Api({
+  link: 'https://api.domainname.students.nomoredomainsrocks.ru',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
 
 export default api;
