@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 require('dotenv').config();
 
-const { JWT_SECRET = 'dev-secret', NODE_ENV } = process.env;
+const { JWT_SECRET, NODE_ENV } = process.env;
 
 // классы с ответами об ошибках
 const RequestError = require('../errors/requestError'); // 400
