@@ -1,7 +1,7 @@
 const signinRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 
-const { login } = require('../controllers/users');
+const { login } = require('../controllers/users').default;
 
 signinRouter.post('/', celebrate({
   body: Joi.object().keys({

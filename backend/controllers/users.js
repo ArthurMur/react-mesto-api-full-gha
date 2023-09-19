@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 require('dotenv').config();
 
-const { JWT_SECRET, NODE_ENV } = process.env;
+const { JWT_SECRET = 'dev-secret', NODE_ENV } = process.env;
 
 // классы с ответами об ошибках
 const RequestError = require('../errors/requestError'); // 400
@@ -120,6 +120,7 @@ const updateUserData = (req, res, next) => {
 
 // Проверка почты и пароля
 const login = (req, res, next) => {
+  console.log(JWT_SECRET, NODE_ENV);
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
