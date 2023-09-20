@@ -17,11 +17,15 @@ class AuthApi {
       // По умолчанию fetch — это GET, можно не указывать
       headers: {
         "Content-Type": "application/json",
+        'Accept': 'application/json',
         "Authorization" : `Bearer ${token}`
       },
       credentials: 'include', // теперь куки посылаются вместе с запросом
     })
       .then(this._processingServerResponse)
+      .then((data) => {
+        return data;
+      });
   }
   // Метод авторизации пользователя
   authorizeUser (password, email) {
@@ -29,18 +33,7 @@ class AuthApi {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
-      },
-      credentials: 'include', // теперь куки посылаются вместе с запросом
-      body: JSON.stringify({ password, email })
-    })
-      .then(this._processingServerResponse)
-  }
-  // Метод регистрации пользователя
-  registerUser (password, email) {
-    return fetch(`${this._authUrl}/signup`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
+        'Accept': 'application/json',
       },
       credentials: 'include', // теперь куки посылаются вместе с запросом
       body: JSON.stringify({ password, email })
@@ -52,6 +45,19 @@ class AuthApi {
         }
         return data;
       })
+  }
+  // Метод регистрации пользователя
+  registerUser (password, email) {
+    return fetch(`${this._authUrl}/signup`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        'Accept': 'application/json',
+      },
+      credentials: 'include', // теперь куки посылаются вместе с запросом
+      body: JSON.stringify({ password, email })
+    })
+      .then(this._processingServerResponse)
   }
 }
 
