@@ -45,19 +45,12 @@ function App() {
 
   // Верификация токена пользователя
   useEffect( () => {
-    apiAuth.checkToken()
-        .then( (res) => { 
-          if (res){
-            const userData = { // здесь можем получить данные пользователя
-              email: res.data.email
-            }
-          setEmail(userData.email); 
-          setIsLoggedIn(true); 
-          navigate('/', { replace: true })
+    const userToken = localStorage.getItem('token')
+    if (userToken) { apiAuth.checkToken(userToken)
+        .then( (res) => { setEmail(res.data.email); setIsLoggedIn(true); navigate('/', { replace: true }) })
         .catch( (err) => { console.log(`Возникла ошибка верификации токена, ${err}`) })
     }
   }, [isLoggedIn])
-  })
 
   // Функция регистрации пользователя (при успехе(провале) всплывает popup через Tooltip используя статус)
   function handleRegister (password, email) {
