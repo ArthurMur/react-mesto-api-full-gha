@@ -13,7 +13,7 @@ export class Api {
     } else {
       return Promise.reject(`Ошибка: ${res.status}`);
     }
-  }
+  } 
   //Инициализация карточек с сервака
   getInitialCards(){
     return fetch(`${this._link}/cards`, {
