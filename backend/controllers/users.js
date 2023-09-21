@@ -25,7 +25,7 @@ const getMe = (req, res, next) => {
 // Получение списка пользователей
 const getUserList = (req, res, next) => {
   User.find({})
-    .then((userList) => res.status(200).send(...userList))
+    .then((userList) => res.status(200).send(userList))
     .catch(next);
 };
 
@@ -37,7 +37,7 @@ const getUserId = (req, res, next) => {
       if (!selectedUser) {
         throw new NotFoundError('Пользователь не найден');
       }
-      res.status(200).send(...selectedUser);
+      res.status(200).send(selectedUser);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -108,7 +108,7 @@ const updateUserData = (req, res, next) => {
     new: true,
     runValidators: true,
   })
-    .then((updatedData) => res.status(200).send(...updatedData))
+    .then((updatedData) => res.status(200).send(updatedData))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new RequestError('Переданы некорректные данные пользователя'));
