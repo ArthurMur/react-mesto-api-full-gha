@@ -11,7 +11,7 @@ function InfoTooltip (props) {
     if (props.status) { 
       props.onClose();
       // Проверяем адрес и переводим при корректном выполнении условия
-      if (location.pathname === '/sign-up') { navigate('/sign-in', { replace: true }) }
+      if (location.pathname === '/signup') { navigate('/signin', { replace: true }) }
     }
     props.onClose();
   }
