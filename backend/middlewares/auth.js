@@ -15,12 +15,10 @@ const tokenVerify = (token) => {
 
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
-  console.log('token in cookies:', token);
   if (!token) {
     return next(new AuthorizationError('Неправильные почта или пароль'));
   }
   const payload = tokenVerify(token);
-  console.log('payload:', payload);
   if (!payload) {
     return next(new AuthorizationError('Неправильные почта или пароль'));
   }
