@@ -24,6 +24,7 @@ module.exports = (req, res, next) => {
   const payload = tokenVerify(token);
   console.log('Token:', token);
   console.log('Payload:', payload);
+  console.log(res.cookies);
   if (!payload) {
     return next(new AuthorizationError('Неправильные почта или пароль'));
   }
