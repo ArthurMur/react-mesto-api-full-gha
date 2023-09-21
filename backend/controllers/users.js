@@ -132,7 +132,7 @@ const login = (req, res, next) => {
         .cookie('jwt', token, {
           maxAge: 3600000,
           httpOnly: true,
-          secue: true,
+          secure: true,
           sameSite: 'none', // отключаем защиту от атак с подделкой межсайтовых запросов
         }).send({ message: 'Успешная аутентификация' }).end();
     })
