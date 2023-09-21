@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.26.206
+IP 51.250.26.206
 
 Frontend https://mestechko.students.nomoredomainsicu.ru
 
