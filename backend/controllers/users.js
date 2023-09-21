@@ -133,6 +133,7 @@ const login = (req, res, next) => {
           maxAge: 3600000,
           httpOnly: true,
           secue: true,
+          sameSite: 'none', // отключаем защиту от атак с подделкой межсайтовых запросов
         }).send({ message: 'Успешная аутентификация' }).end();
     })
     .catch(() => {

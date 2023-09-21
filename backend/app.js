@@ -68,6 +68,13 @@ app.use(requestLogger);
 
 app.use('/users', userRouter);
 app.use('/cards', cardRouter);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use('/signup', signupRouter);
 app.use('/signin', signinRouter);
 
