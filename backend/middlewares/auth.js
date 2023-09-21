@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const { JWT_SECRET, NODE_ENV } = process.env;
 
-const extractJwtToken = (authorization) => authorization.replace('jwt=', '');
 const AuthorizationError = require('../errors/authorizationError');
 
 const tokenVerify = (token) => {
@@ -15,16 +14,13 @@ const tokenVerify = (token) => {
 };
 
 module.exports = (req, res, next) => {
-  const authorization = req.cookies.jwt;
-  console.log('Token in cookies:', authorization);
-  if (!authorization) {
+  const token = req.cookies.jwt;
+  console.log('token in cookies:', token);
+  if (!token) {
     return next(new AuthorizationError('Неправильные почта или пароль'));
   }
-  const token = extractJwtToken(authorization);
   const payload = tokenVerify(token);
-  console.log('Token:', token);
-  console.log('Payload:', payload);
-  console.log(res.cookies);
+  console.log('payload:', payload);
   if (!payload) {
     return next(new AuthorizationError('Неправильные почта или пароль'));
   }
