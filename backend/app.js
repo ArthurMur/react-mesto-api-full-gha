@@ -22,21 +22,8 @@ const { PORT = 3000, BASE_PATH = 'localhost' } = process.env;
 
 const app = express();
 
-const whitelist = [ // список разрешенных доменов
-  'http://api.domainname.students.nomoredomainsrocks.ru',
-  'https://api.domainname.students.nomoredomainsrocks.ru',
-  'http://mestechko.students.nomoredomainsicu.ru',
-  'https://mestechko.students.nomoredomainsicu.ru',
-  'https://localhost:3000',
-  'http://localhost:3000',
-  'https://praktikum.tk',
-  'http://praktikum.tk',
-];
-
 const corsOptions = {
-  origin: whitelist, // источник домена (откуда запрос)
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // методы
-  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization', // заголовок Authorization
+  origin: ['http://localhost:3000', 'https://api.domainname.students.nomoredomainsrocks.ru'], // источник домена (откуда запрос)
   credentials: true, // обмен учетными данными (cookies)
 };
 

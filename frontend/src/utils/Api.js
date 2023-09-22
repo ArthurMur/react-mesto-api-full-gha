@@ -6,7 +6,7 @@ export class Api {
       ...data.headers, 
       authorization: `Bearer ${Cookies.get('token')}`};
   }
-  //Метод отбраоботки сервера 
+  //Метод обработки сервера 
   _checkResponse(res){
     if (res.ok) {
       return res.json();

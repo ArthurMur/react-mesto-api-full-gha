@@ -133,12 +133,23 @@ const login = (req, res, next) => {
           maxAge: 3600000,
           httpOnly: true,
           secure: true,
-          sameSite: 'none', // отключаем защиту от атак с подделкой межсайтовых запросов
+          sameSite: 'none',
         }).send({ message: 'Успешная аутентификация' }).end();
     })
     .catch(() => {
       throw new AuthorizationError('Ошибка аутентификации');
     }).catch(next);
+};
+
+// LOGOUT
+module.exports.logout = (req, res) => {
+  res.cookie('jwt', 'none', {
+    maxAge: 5000,
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+  });
+  res.send({ message: 'Успешный выход' });
 };
 
 module.exports = {
