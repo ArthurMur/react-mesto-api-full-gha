@@ -18,7 +18,7 @@ class AuthApi {
       headers: {
         "Content-Type": "application/json",
         'Accept': 'application/json',
-        'Authorization' : `Bearer ${Cookies.get('jwt')}`
+        "Authorization" : `Bearer ${token}`
       },
       credentials: 'include', // теперь куки посылаются вместе с запросом
     })
