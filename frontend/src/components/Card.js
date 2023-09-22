@@ -6,7 +6,7 @@ function Card (props) {
   const userItem = useContext(CurrentUserContext);
 
   // Определяем владельца карточкой
-  const isOwn = props.card.owner.toString() === userItem._id;
+  const isOwn = props.card.owner === userItem._id;
 
   // Определяем наличие поставленного лайка
   const isLiked = props.card.likes.some(item => item._id === userItem._id);
