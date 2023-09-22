@@ -46,7 +46,7 @@ function App() {
 
   // Верификация токена пользователя
   useEffect( () => {
-    const userToken = Cookies.get('token');
+    const userToken = Cookies.get('jwt');
     if (userToken) { apiAuth.checkToken(userToken)
         .then( (res) => { setEmail(res.email); setIsLoggedIn(true); navigate('/', { replace: true }) })
         .catch( (err) => { console.log(`Возникла ошибка верификации токена, ${err}`) })

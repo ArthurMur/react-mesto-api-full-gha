@@ -4,7 +4,7 @@ export class Api {
     this._link = data.link;
     this._headers = {
       ...data.headers, 
-      authorization: `Bearer ${Cookies.get('token')}`};
+      authorization: `Bearer ${Cookies.get('jwt')}`};
   }
   //Метод обработки сервера 
   _checkResponse(res){
