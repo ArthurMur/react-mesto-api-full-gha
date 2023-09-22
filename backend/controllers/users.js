@@ -141,17 +141,6 @@ const login = (req, res, next) => {
     }).catch(next);
 };
 
-// LOGOUT
-module.exports.logout = (req, res) => {
-  res.cookie('jwt', 'none', {
-    maxAge: 5000,
-    httpOnly: true,
-    secure: true,
-    sameSite: 'none',
-  });
-  res.send({ message: 'Успешный выход' });
-};
-
 module.exports = {
   getUserList,
   getUserId,
