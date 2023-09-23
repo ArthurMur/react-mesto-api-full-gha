@@ -66,18 +66,18 @@ function App() {
         // Если токен валиден, авторизовываем и перебрасывам на главную
         if (res.status === 'ok') {
           // Получаем куки из заголовка ответа
-        const cookiesHeader = res.headers.get('Set-Cookie');
-        // Разбиваем строку кук по символу ";" и находим куку с именем "jwt"
-        const cookiesArray = cookiesHeader.split(';');
-        const jwtCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('jwt='));
-        // Если удалось найти куку с токеном, извлекаем токен и сохраняем его
-        if (jwtCookie) {
-          const jwtToken = jwtCookie.split('=')[1];
-          localStorage.setItem('token', jwtToken);
-          setEmail(email);
-          setIsLoggedIn(true);
-          navigate('/');
-        }
+          const cookiesHeader = res.headers.get('Set-Cookie');
+          // Разбиваем строку кук по символу ";" и находим куку с именем "jwt"
+          const cookiesArray = cookiesHeader.split(';');
+          const jwtCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('jwt='));
+          // Если удалось найти куку с токеном, извлекаем токен и сохраняем его
+          if (jwtCookie) {
+            const jwtToken = jwtCookie.split('jwt=');
+            localStorage.setItem('token', jwtToken);
+            setEmail(email);
+            setIsLoggedIn(true);
+            navigate('/');
+          }
         }
       })
       .catch( (err) => { console.log(`Возникла ошибка при авторизации, ${err}`); setTooltipOpen(true); setStatus(false) })
