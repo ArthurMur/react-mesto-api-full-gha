@@ -1,6 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
-/* eslint-disable import/no-unresolved */
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
