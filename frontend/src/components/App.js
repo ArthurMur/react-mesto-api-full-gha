@@ -67,9 +67,11 @@ function App() {
         if (res.status === 'ok') {
           // Получаем куки из заголовка ответа
           const cookiesHeader = res.headers.get('Set-Cookie');
+          console.log('cookiesHeader: ', cookiesHeader)
           // Разбиваем строку кук по символу ";" и находим куку с именем "jwt"
           const cookiesArray = cookiesHeader.split(';');
           const jwtCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('jwt='));
+          console.log('jwt: ', jwtCookie)
           // Если удалось найти куку с токеном, извлекаем токен и сохраняем его
           if (jwtCookie) {
             const jwtToken = jwtCookie.split('=')[1];
