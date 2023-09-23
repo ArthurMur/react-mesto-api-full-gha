@@ -14,6 +14,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
 import apiAuth from '../utils/AuthApi';
+import Cookies from 'js-cookie';
 
 function App() {
 
@@ -84,7 +85,7 @@ function App() {
   }
 
   // Функция выхода пользователя
-  function handleLogout (res) { res.clearCookie('jwt'); setIsLoggedIn(false); }
+  function handleLogout () { Cookies.remove('jwt');; setIsLoggedIn(false); }
 
   // Обработчик открытия попапа обновления аватара
   function handleEditAvatarClick () { setIsEditAvatarPopupOpen(true) }
