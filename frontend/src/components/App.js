@@ -37,7 +37,7 @@ function App() {
     api.getAppInfo()
       .then(( [ cardData, userProfileData] ) => {
         setCurrentUser(userProfileData);
-        setCards(cardData);
+        setCards(cardData.reverse());
       })
       .catch( (err) => { console.log(`Возникла ошибка, ${err}`) })
   }, [])
