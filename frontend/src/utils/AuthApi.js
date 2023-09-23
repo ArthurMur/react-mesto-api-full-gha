@@ -40,8 +40,13 @@ class AuthApi {
     })
       .then(this._processingServerResponse)
       .then((data) => {
-        if (data.token) {
-          Cookies.set('jwt', data.token, { expires: 7 });
+        const cookiesHeader = data.headers.get('Set-Cookie');
+        if (cookiesHeader) {
+          // Разбиваем строку кук по символу ";" и сохраняем куки
+          const cookiesArray = cookiesHeader.split(';');
+          cookiesArray.forEach((cookie) => {
+            document.cookie = cookie;
+          });
         }
         return data;
       })

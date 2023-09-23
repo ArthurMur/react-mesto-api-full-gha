@@ -63,11 +63,20 @@ function App() {
     apiAuth.authorizeUser(password, email)
       .then( (res) => {
         // Если токен валиден, авторизовываем и перебрасывам на главную
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          setEmail(email);
-          setIsLoggedIn(true);
-          navigate('/');
+        if (res.status === 'ok') {
+          // Получаем куки из заголовка ответа
+          const cookiesHeader = res.headers.get('Set-Cookie');
+          // Разбиваем строку кук по символу ";" и находим куку с именем "jwt"
+          const cookiesArray = cookiesHeader.split(';');
+          const jwtCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('jwt='));
+          // Если удалось найти куку с токеном, сохраняем ее на клиентской стороне
+          if (jwtCookie) {
+            // Используйте document.cookie для сохранения куки
+            document.cookie = jwtCookie;
+            setEmail(email);
+            setIsLoggedIn(true);
+            navigate('/');
+          }
         }
       })
       .catch( (err) => { console.log(`Возникла ошибка при авторизации, ${err}`); setTooltipOpen(true); setStatus(false) })
