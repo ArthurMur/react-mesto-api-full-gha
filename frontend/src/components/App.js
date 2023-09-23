@@ -72,7 +72,7 @@ function App() {
           const jwtCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('jwt='));
           // Если удалось найти куку с токеном, извлекаем токен и сохраняем его
           if (jwtCookie) {
-            const jwtToken = jwtCookie.split('jwt=');
+            const jwtToken = jwtCookie.split('=')[1];
             localStorage.setItem('token', jwtToken);
             setEmail(email);
             setIsLoggedIn(true);
