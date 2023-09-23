@@ -63,18 +63,28 @@ function App() {
     apiAuth.authorizeUser(password, email)
       .then( (res) => {
         // Если токен валиден, авторизовываем и перебрасывам на главную
-        if (res.token) {
+        if (res.status === 'ok') {
+          // Получаем куки из заголовка ответа
+        const cookiesHeader = res.headers.get('Set-Cookie');
+        // Разбиваем строку кук по символу ";" и находим куку с именем "jwt"
+        const cookiesArray = cookiesHeader.split(';');
+        const jwtCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('jwt='));
+        // Если удалось найти куку с токеном, извлекаем токен и сохраняем его
+        if (jwtCookie) {
+          const jwtToken = jwtCookie.split('=')[1];
+          localStorage.setItem('token', jwtToken);
           localStorage.setItem('token', res.token);
           setEmail(email);
           setIsLoggedIn(true);
           navigate('/');
+        }
         }
       })
       .catch( (err) => { console.log(`Возникла ошибка при авторизации, ${err}`); setTooltipOpen(true); setStatus(false) })
   }
 
   // Функция выхода пользователя
-  function handleLogout () { localStorage.removeItem('token'); setIsLoggedIn(false);  }
+  function handleLogout (res) { res.clearCookie('jwt'); setIsLoggedIn(false); }
 
   // Обработчик открытия попапа обновления аватара
   function handleEditAvatarClick () { setIsEditAvatarPopupOpen(true) }
