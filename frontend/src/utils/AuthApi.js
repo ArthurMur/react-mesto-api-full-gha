@@ -40,19 +40,8 @@ class AuthApi {
     })
       .then(this._processingServerResponse)
       .then((data) => {
-        if (data.email && data.password) {
-          const cookiesHeader = data.headers.get('Set-Cookie');
-          if (cookiesHeader) {
-            // Разбиваем строку кук по символу ";" и сохраняем куки на клиентской стороне
-            const cookiesArray = cookiesHeader.split(';');
-            const jwtCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('jwt='));
-            if (jwtCookie) {
-              // Сохраняем куку с именем "jwt" на клиентской стороне
-              const jwtToken = jwtCookie.split('=')[1];
-              Cookies.set('jwt', jwtToken, { expires: 7 });
-            }
-          }
-          
+        if (data.token) {
+          Cookies.set('jwt', data.token, { expires: 7 });
         }
         return data;
       })

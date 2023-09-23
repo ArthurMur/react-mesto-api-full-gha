@@ -135,7 +135,7 @@ const login = (req, res, next) => {
           httpOnly: true,
           secure: true,
           sameSite: 'none',
-        }).send({ message: 'Успешная аутентификация' }).end();
+        }).send({ message: 'Успешная аутентификация', token }).end();
     })
     .catch(() => {
       throw new AuthorizationError('Ошибка аутентификации');
