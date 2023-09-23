@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 require('dotenv').config();
 
-const { JWT_SECRET = 'dev-secret2', NODE_ENV = 'production' } = process.env;
+const { JWT_SECRET = 'dev-secret2', NODE_ENV } = process.env;
 const { MODE_PRODUCTION, DEV_KEY } = require('../utils/constants');
 
 // классы с ответами об ошибках
