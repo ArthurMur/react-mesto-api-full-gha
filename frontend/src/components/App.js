@@ -97,7 +97,7 @@ function App() {
 
   // Обработчик лайков карточки
   function handleCardLike (card) {
-  const isLiked = card.likes.some(cardItem => cardItem._id === currentUser._id);
+  const isLiked = card.likes.some(cardItem => cardItem === currentUser._id);
   console.log(isLiked)
   api.changeLikeCardStatus(card._id, !isLiked)
     .then( (cardsItem) => {
