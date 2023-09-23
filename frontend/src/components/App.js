@@ -74,7 +74,6 @@ function App() {
         if (jwtCookie) {
           const jwtToken = jwtCookie.split('=')[1];
           localStorage.setItem('token', jwtToken);
-          localStorage.setItem('token', res.token);
           setEmail(email);
           setIsLoggedIn(true);
           navigate('/');
