@@ -14,7 +14,6 @@ import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
 import apiAuth from '../utils/AuthApi';
-import Cookies from 'js-cookie';
 
 function App() {
 
@@ -67,15 +66,13 @@ function App() {
         if (res.status === 'ok') {
           // Получаем куки из заголовка ответа
           const cookiesHeader = res.headers.get('Set-Cookie');
-          console.log('cookiesHeader: ', cookiesHeader)
           // Разбиваем строку кук по символу ";" и находим куку с именем "jwt"
           const cookiesArray = cookiesHeader.split(';');
           const jwtCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('jwt='));
-          console.log('jwt: ', jwtCookie)
-          // Если удалось найти куку с токеном, извлекаем токен и сохраняем его
+          // Если удалось найти куку с токеном, сохраняем ее на клиентской стороне
           if (jwtCookie) {
-            const jwtToken = jwtCookie.split('=')[1];
-            localStorage.setItem('token', jwtToken);
+            // Используйте document.cookie для сохранения куки
+            document.cookie = jwtCookie;
             setEmail(email);
             setIsLoggedIn(true);
             navigate('/');
@@ -86,7 +83,7 @@ function App() {
   }
 
   // Функция выхода пользователя
-  function handleLogout () { Cookies.remove('jwt');; setIsLoggedIn(false); }
+  function handleLogout (res) { res.clearCookie('jwt'); setIsLoggedIn(false);  }
 
   // Обработчик открытия попапа обновления аватара
   function handleEditAvatarClick () { setIsEditAvatarPopupOpen(true) }
