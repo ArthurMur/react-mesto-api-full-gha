@@ -5,6 +5,7 @@ const User = require('../models/user');
 require('dotenv').config();
 
 const { JWT_SECRET, NODE_ENV } = process.env;
+const { MODE_PRODUCTION, DEV_KEY } = require('../utils/constants');
 
 // классы с ответами об ошибках
 const RequestError = require('../errors/requestError'); // 400
@@ -125,7 +126,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        NODE_ENV === MODE_PRODUCTION ? JWT_SECRET : DEV_KEY,
         { expiresIn: '7d' },
       );
       res

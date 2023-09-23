@@ -2,12 +2,13 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const { JWT_SECRET, NODE_ENV } = process.env;
+const { MODE_PRODUCTION, DEV_KEY } = require('../utils/constants');
 
 const AuthorizationError = require('../errors/authorizationError');
 
 const tokenVerify = (token) => {
   try {
-    return jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    return jwt.verify(token, NODE_ENV === MODE_PRODUCTION ? JWT_SECRET : DEV_KEY);
   } catch (err) {
     return '';
   }
