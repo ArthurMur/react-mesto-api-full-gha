@@ -9,7 +9,7 @@ function Card (props) {
   const isOwn = props.card.owner === userItem._id;
 
   // Определяем наличие поставленного лайка
-  const isLiked = props.card.likes.some(item => item._id === userItem._id);
+  const isLiked = props.card.likes.some(item => item === userItem._id);
 
   function handleClick () { props.onCardClick(props.card) }
   function handleDelete () { props.onCardDelete(props.card) }
