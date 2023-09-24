@@ -48,7 +48,7 @@ function App() {
         .then( (res) => { setEmail(res.email); setIsLoggedIn(true); navigate('/', { replace: true }) })
         .catch( (err) => { console.log(`Возникла ошибка верификации токена, ${err}`) })
     }
-  }, [isLoggedIn, navigate])
+  }, [isLoggedIn])
 
   // Функция регистрации пользователя (при успехе(провале) всплывает popup через Tooltip используя статус)
   function handleRegister (password, email) {
