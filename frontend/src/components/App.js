@@ -40,7 +40,7 @@ function App() {
         setCards(cardData.reverse());
       })
       .catch( (err) => { console.log(`Возникла ошибка, ${err}`) })
-  }, [isLoggedIn])
+  }, [])
 
   // Верификация токена пользователя
   useEffect( () => {
