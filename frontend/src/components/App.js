@@ -67,12 +67,6 @@ function App() {
           setEmail(email);
           setIsLoggedIn(true);
           navigate('/');
-          api.getAppInfo()
-          .then(( [ cardData, userProfileData] ) => {
-            setCurrentUser(userProfileData);
-            setCards(cardData.reverse());
-          })
-          .catch( (err) => { console.log(`Возникла ошибка, ${err}`) })
         }
       })
       .catch( (err) => { console.log(`Возникла ошибка при авторизации, ${err}`); setTooltipOpen(true); setStatus(false) })
