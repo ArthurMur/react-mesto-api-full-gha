@@ -6,6 +6,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const AuthorizationError = require('../errors/authorizationError');
+const NotFoundError = require('../errors/notFoundError');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -23,7 +24,6 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
-    minlength: 4,
     validate: {
       validator: (correct) => validator.isURL(correct),
       message: 'Ошибка при передаче аватара пользователя',
@@ -42,10 +42,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     select: false,
-    validate: {
-      validator: ({ length }) => length >= 6,
-      message: 'Пароль должен состоять минимум из 6 символов',
-    },
   },
 }, { versionKey: false });
 
@@ -54,7 +50,7 @@ userSchema.statics.findUserByCredentials = function (email, password) {
     .select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error('Пользователь не найден'));
+        return Promise.reject(new NotFoundError('Пользователь не найден'));
       }
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {

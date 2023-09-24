@@ -66,7 +66,7 @@ const likeCard = (req, res, next) => {
     return res.status(201).send(likedCard);
   }).catch((err) => {
     if (err.name === 'CastError') {
-      next(new RequestError('Некорректный Id карточки'));
+      return next(new RequestError('Некорректный Id карточки'));
     }
     return next(err);
   });

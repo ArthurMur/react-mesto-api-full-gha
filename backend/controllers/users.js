@@ -9,7 +9,6 @@ const { MODE_PRODUCTION, DEV_KEY } = require('../utils/constants');
 
 // классы с ответами об ошибках
 const RequestError = require('../errors/requestError'); // 400
-const AuthorizationError = require('../errors/authorizationError'); // 401
 const NotFoundError = require('../errors/notFoundError'); // 404
 const EmailExistenceError = require('../errors/emailExistenceError'); // 409
 
@@ -45,7 +44,7 @@ const getUserId = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new RequestError('Некорректный Id пользователя'));
+        return next(new RequestError('Некорректный Id пользователя'));
       }
       return next(err);
     });
@@ -55,10 +54,6 @@ const getUserId = (req, res, next) => {
 const registerUser = (req, res, next) => {
   const { email, password } = req.body; // обязательные поля
   const { name, about, avatar } = req.body; // необязательные
-
-  if (!email || !password) {
-    throw new RequestError('Все поля должны быть заполнены');
-  }
 
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
@@ -76,9 +71,9 @@ const registerUser = (req, res, next) => {
       if (err.code === 11000) {
         next(new EmailExistenceError('Даный email уже зарегистрирован'));
       } else if (err.name === 'ValidationError') {
-        next(new RequestError('Переданы некорректные данные'));
+        return next(new RequestError('Переданы некорректные данные'));
       } else {
-        next(err);
+        return next(err);
       }
     });
 };
@@ -112,7 +107,12 @@ const updateUserData = (req, res, next) => {
     new: true,
     runValidators: true,
   })
-    .then((updatedData) => res.status(200).send(updatedData))
+    .then((updatedData) => {
+      if (updatedData === null) {
+        throw new NotFoundError('Пользователь не найден');
+      }
+      res.status(200).send(updatedData);
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new RequestError('Переданы некорректные данные пользователя'));
@@ -134,9 +134,7 @@ const login = (req, res, next) => {
       );
       res.send({ message: 'Успешная аутентификация', token }).end();
     })
-    .catch(() => {
-      throw new AuthorizationError('Ошибка аутентификации');
-    }).catch(next);
+    .catch(next);
 };
 
 module.exports = {
