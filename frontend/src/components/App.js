@@ -33,12 +33,15 @@ function App() {
 
   // Рендер карточек и данных пользователя
   useEffect( () => {
-    api.getAppInfo()
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.getAppInfo()
       .then(( [ cardData, userProfileData] ) => {
         setCurrentUser(userProfileData);
         setCards(cardData.reverse());
       })
       .catch( (err) => { console.log(`Возникла ошибка, ${err}`) })
+    }
   }, [isLoggedIn])
 
   // Верификация токена пользователя
@@ -60,10 +63,10 @@ function App() {
   // Функция авторизации пользователя (при неудаче всплывает popup через Tooltip используя статус)
   function handleLogin (password, email) {
     apiAuth.authorizeUser(password, email)
-      .then( (res) => {
+      .then( () => {
         // Если токен валиден, авторизовываем и перебрасывам на главную
-        if (res.token) {
-          localStorage.setItem('token', res.token);
+        const userToken = localStorage.getItem('token')
+        if (userToken) {
           setEmail(email);
           setIsLoggedIn(true);
           navigate('/');
