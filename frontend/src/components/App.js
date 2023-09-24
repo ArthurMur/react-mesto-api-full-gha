@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Header from './Header';
@@ -49,7 +48,7 @@ function App() {
         .then( (res) => { setEmail(res.email); setIsLoggedIn(true); navigate('/', { replace: true }) })
         .catch( (err) => { console.log(`Возникла ошибка верификации токена, ${err}`) })
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn, navigate])
 
   // Функция регистрации пользователя (при успехе(провале) всплывает popup через Tooltip используя статус)
   function handleRegister (password, email) {
