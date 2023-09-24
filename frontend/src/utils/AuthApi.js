@@ -17,9 +17,8 @@ class AuthApi {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization' : `Bearer ${localStorage.getItem('token')}`
+        'Authorization' : `Bearer ${token}`
       },
-      credentials: 'include', // теперь куки посылаются вместе с запросом
     })
       .then(this._processingServerResponse)
       .then((data) => {
@@ -34,7 +33,6 @@ class AuthApi {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      credentials: 'include', // теперь куки посылаются вместе с запросом
       body: JSON.stringify({ password, email })
     })
       .then(this._processingServerResponse)
@@ -53,7 +51,6 @@ class AuthApi {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      credentials: 'include', // теперь куки посылаются вместе с запросом
       body: JSON.stringify({ password, email })
     })
       .then(this._processingServerResponse)
