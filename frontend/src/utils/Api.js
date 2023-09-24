@@ -17,7 +17,6 @@ export class Api {
   getInitialCards(){
     return fetch(`${this._link}/cards`, {
     headers: this._headers,
-    credentials: 'include', // теперь куки посылаются вместе с запросом
     })
     .then(this._checkResponse);
   }
@@ -31,7 +30,6 @@ export class Api {
   addNewCard(name, link){
     return fetch(`${this._link}/cards`, {
       headers: this._headers,
-      credentials: 'include', // теперь куки посылаются вместе с запросом
       method: 'POST',
       body: JSON.stringify({ name, link })
     })
@@ -42,7 +40,6 @@ export class Api {
   deleteCard(cardId) {
     return fetch(`${this._link}/cards/${cardId}`, {
       headers: this._headers,
-      credentials: 'include', // теперь куки посылаются вместе с запросом
       method: 'DELETE',
     })
       .then(this._checkResponse)
@@ -52,7 +49,6 @@ export class Api {
   getUserData() {
   return fetch(`${this._link}/users/me`, {
     headers: this._headers,
-    credentials: 'include', // теперь куки посылаются вместе с запросом
   })
     .then(this._checkResponse)
   }
@@ -61,7 +57,6 @@ export class Api {
   sendUserData(userName, userAbout) {
     return fetch(`${this._link}/users/me`, {
       headers: this._headers,
-      credentials: 'include', // теперь куки посылаются вместе с запросом
       method: 'PATCH',
       body: JSON.stringify({ name: userName, about: userAbout })
     })
@@ -72,7 +67,6 @@ export class Api {
   sendAvatarData(avatarLink) {
     return fetch(`${this._link}/users/me/avatar`, {
       headers: this._headers,
-      credentials: 'include', // теперь куки посылаются вместе с запросом
       method: 'PATCH',
       body: JSON.stringify({ avatar: avatarLink.avatar })
     })
@@ -84,14 +78,12 @@ export class Api {
     if (isLiked) {
       return fetch(`${this._link}/cards/${cardId}/likes`, {
         headers: this._headers,
-        credentials: 'include', // теперь куки посылаются вместе с запросом
         method: 'PUT',
       })
       .then(this._checkResponse)
     } else {
       return fetch(`${this._link}/cards/${cardId}/likes`, {
         headers: this._headers,
-        credentials: 'include', // теперь куки посылаются вместе с запросом
         method: 'DELETE',
       })
       .then(this._checkResponse)
