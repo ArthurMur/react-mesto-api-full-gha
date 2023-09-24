@@ -6,22 +6,25 @@ const { MODE_PRODUCTION, DEV_KEY } = require('../utils/constants');
 
 const AuthorizationError = require('../errors/authorizationError');
 
-// eslint-disable-next-line consistent-return
+const tokenVerify = (token) => {
+  try {
+    return jwt.verify(token, NODE_ENV === MODE_PRODUCTION ? JWT_SECRET : DEV_KEY);
+  } catch (err) {
+    return '';
+  }
+};
+
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
-
-  if (!authorization || !authorization.startsWith('Bearer ')) {
-    return next(new AuthorizationError('Неправильные почта или пароль'));
-  }
-
   const token = authorization.replace('Bearer ', '');
-  let payload;
-  try {
-    payload = jwt.verify(token, NODE_ENV === MODE_PRODUCTION ? JWT_SECRET : DEV_KEY);
-  } catch (err) {
+  if (!token) {
     return next(new AuthorizationError('Неправильные почта или пароль'));
   }
-  req.user = payload;
+  const payload = tokenVerify(token);
+  if (!payload) {
+    return next(new AuthorizationError('Неправильные почта или пароль'));
+  }
 
+  req.user = payload;
   return next();
 };
