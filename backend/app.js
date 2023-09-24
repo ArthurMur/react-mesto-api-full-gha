@@ -20,6 +20,7 @@ const app = express();
 
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://mestechko.students.nomoredomainsicu.ru', 'https://api.domainname.students.nomoredomainsrocks.ru'], // источник домена (откуда запрос)
+  credentials: true, // обмен учетными данными (cookies)
 };
 
 app.use(cors(corsOptions)); // доступ для других доменов
