@@ -18,7 +18,10 @@ const getMe = (req, res, next) => {
   const { _id } = req.user;
   User.find({ _id })
     .then((user) => {
-      if (user) return res.status(200).send(...user);
+      if (!user) {
+        throw new NotFoundError('Пользователь не найден');
+      }
+      res.status(200).send(...user);
     })
     .catch(next);
 };

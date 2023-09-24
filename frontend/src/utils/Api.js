@@ -3,7 +3,7 @@ export class Api {
     this._link = data.link;
     this._headers = {
       ...data.headers, 
-      'Authorization': `Bearer ${localStorage.getItem('token')}`,};
+      authorization: `Bearer ${localStorage.getItem('token')}`,};
   }
   //Метод обработки сервера 
   _checkResponse(res){
