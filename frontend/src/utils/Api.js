@@ -1,10 +1,9 @@
-import Cookies from 'js-cookie';
 export class Api {
   constructor(data) {
     this._link = data.link;
     this._headers = {
       ...data.headers, 
-      authorization: `Bearer ${Cookies.get('jwt')}`};
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,};
   }
   //Метод обработки сервера 
   _checkResponse(res){

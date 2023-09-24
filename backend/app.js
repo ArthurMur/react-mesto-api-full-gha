@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { rateLimit } = require('express-rate-limit');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const userRouter = require('./routes/users');
@@ -21,7 +20,6 @@ const app = express();
 
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://mestechko.students.nomoredomainsicu.ru', 'https://api.domainname.students.nomoredomainsrocks.ru'], // источник домена (откуда запрос)
-  credentials: true, // обмен учетными данными (cookies)
 };
 
 app.use(cors(corsOptions)); // доступ для других доменов
@@ -40,7 +38,6 @@ app.use(limiter);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 // подключаемся к серверу mongo
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb')

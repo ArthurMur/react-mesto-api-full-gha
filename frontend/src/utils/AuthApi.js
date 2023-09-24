@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 class AuthApi {
   constructor(authUrl) {
     this._authUrl = authUrl;
@@ -16,9 +15,9 @@ class AuthApi {
     return fetch(`${this._authUrl}/users/me`, {
       // По умолчанию fetch — это GET, можно не указывать
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
-        "Authorization" : `Bearer ${token}`
+        'Authorization' : `Bearer ${token}`
       },
       credentials: 'include', // теперь куки посылаются вместе с запросом
     })
@@ -32,7 +31,7 @@ class AuthApi {
     return fetch(`${this._authUrl}/signin`, {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
       credentials: 'include', // теперь куки посылаются вместе с запросом
@@ -41,7 +40,7 @@ class AuthApi {
       .then(this._processingServerResponse)
       .then((data) => {
         if (data.token) {
-          Cookies.set('jwt', data.token, { expires: 7 });
+          localStorage.setItem('token', data.token);
         }
         return data;
       })
@@ -51,7 +50,7 @@ class AuthApi {
     return fetch(`${this._authUrl}/signup`, {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
       credentials: 'include', // теперь куки посылаются вместе с запросом

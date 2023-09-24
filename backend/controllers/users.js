@@ -129,13 +129,7 @@ const login = (req, res, next) => {
         NODE_ENV === MODE_PRODUCTION ? JWT_SECRET : DEV_KEY,
         { expiresIn: '7d' },
       );
-      res
-        .cookie('jwt', token, {
-          maxAge: 3600000,
-          httpOnly: true,
-          secure: true,
-          sameSite: 'none',
-        }).send({ message: 'Успешная аутентификация', token }).end();
+      res.send({ message: 'Успешная аутентификация', token }).end();
     })
     .catch(() => {
       throw new AuthorizationError('Ошибка аутентификации');
